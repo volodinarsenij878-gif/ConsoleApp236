@@ -1,0 +1,40 @@
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    namespace Program77
+    {
+    internal class Program
+    {
+        static void Main()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Введите глубину погружения аквалангиста (метры): ");
+            string input = Console.ReadLine();
+
+            if (double.TryParse(input, out double depth) && depth >= 0)
+            {
+                string zone = GetDivingZone(depth);
+                Console.WriteLine($"Зона погружения: {zone}");
+            }
+            else
+            {
+                Console.WriteLine("Некорректный ввод. Пожалуйста, введите неотрицательное число.");
+            }
+        }
+
+        static string GetDivingZone(double depth)
+        {
+            if (depth < 40)
+                return "Рекреационная зона";
+
+            if (depth <= 100) // здесь уже точно depth >= 40
+                return "Техническая зона";
+
+            return "Глубоководная зона"; // depth > 100
+        }
+    }
+    }
